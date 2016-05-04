@@ -1,6 +1,7 @@
 <div class="mt-xl mw-xl pv-xl mh-auto">
-  <div class="bb-xl bc-cb">
-    <h1 id="address" class="m-0 ff-ss tt-u c-cb fs-600 ls-000"></h1>
+  <div class="d-f d-fab bb-xl bc-cb">
+    <h1 id="address" class="m-0 ff-ss pl-sm tt-u c-cb fs-600 ls-000"></h1>
+    <span id="owner" class="c-g300 ml-a mb-xs fs-i hide-md"></span>
   </div>
   <p class="ff-s fs-i fs-300 lh-300">This address would contribute <span id="result" class="c-ob">$-.--</span> per year. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id loc est laborum.</p>
 </div>
@@ -28,6 +29,7 @@
 
     if (address && owner) {
       $('#address').html(address);
+      $('#owner').html(owner);
     } else {
       $('#address').parents('.bb-xl').remove();
     }

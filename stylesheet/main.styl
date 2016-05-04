@@ -85,6 +85,10 @@ body {
   display: flex;
 }
 
+.d-fab {
+  align-items: flex-end;
+}
+
 /* Icons */
 .icon-md {
   height: 40px;
@@ -153,6 +157,10 @@ a:hover {
   text-decoration: underline;
 }
 
+.hide-md
+  @media screen and (max-width: 930px)
+    display: none
+
 /* Margins */
 .mh-auto
   @media screen and (max-width: 930px)
@@ -167,12 +175,18 @@ a:hover {
   margin-right: 50px;
 }
 
-.mt-xl {
-  margin-top: 50px;
-}
+.mt-xl
+  margin-top: 50px
+
+  @media screen and (max-width: 500px)
+    margin-top: 25px
 
 .m-0 {
   margin: 0;
+}
+
+.mb-xs {
+  margin-bottom: 0.25rem;
 }
 
 .ml-a {
@@ -206,15 +220,22 @@ a:hover {
   padding-bottom: 0.75rem;
 }
 
+.pl-sm {
+  padding-right: 2em;
+}
+
 .pv-sm {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
 
-.pv-xl {
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
+.pv-xl
+  padding-top: 50px
+  padding-bottom: 50px
+
+  @media screen and (max-width: 500px)
+    padding-top: 25px
+    padding-bottom: 25px
 
 /* Paths */
 .p100 {
