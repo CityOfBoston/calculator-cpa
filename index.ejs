@@ -1,56 +1,8 @@
-<form action="//www.cityofboston.gov/assessing/search/json.asp" method="GET">
-  <input id="query" class="search__query" name="q" />
-  <button>Search</button>
-</form>
-<div id="results"></div>
+<div class="mt-xl mw-xl pv-xl mh-auto">
+  <div class="bb-xl bc-cb">
+    <h1 class="m-0 ff-ss tt-u c-cb fs-600 ls-000">Community Preservation Act</h1>
+  </div>
+  <p class="ff-s fs-i fs-300 lh-300">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione</p>
+</div>
 
-<script id="resultsTable" type="text/x-handlebars-template">
-  <table>
-    <thead>
-      <th>Parcel ID</th>
-      <th>Owner</th>
-      <th>Address</th>
-    </thead>
-    <tbody>
-      {{#addresses}}
-        <tr>
-          <td><a href="/parcel.html?pid={{parcelID}}">{{parcelID}}</a></td>
-          <td>{{owner}}</td>
-          <td>{{address}}</td>
-        </tr>
-      {{/addresses}}
-    </tbody>
-  </table>
-</script>
-
-<script>
-  var source = $('#resultsTable').html();
-  var template = Handlebars.compile(source);
-
-  var handleResults = function(r) {
-    if (r && r.addresses.length > 0) {
-      $('#results').html(template(r));
-    } else {
-      $('#results').html("We didn't find any matches for that address.");
-    }
-  }
-
-  var handleSearch = function (ev) {
-    ev.preventDefault();
-
-    var value = $('#query').val();
-
-    if (value && value.length > 2) {
-      performSearch(value);
-    } else {
-      $('#results').html("");
-    }
-  }
-
-  var performSearch = function (value) {
-    $.getJSON($('form').attr('action') + '?q=' + value, handleResults);
-  }
-
-  $('form').on('submit', handleSearch);
-  $('#query').on('keyup', handleSearch);
-</script>
+<%- partial("_search", {title: "Seach address..."}) %>

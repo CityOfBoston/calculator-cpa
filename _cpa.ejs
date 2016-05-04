@@ -1,0 +1,37 @@
+<div class="mt-xl mw-xl pv-xl mh-auto">
+  <div class="bb-xl bc-cb">
+    <h1 id="address" class="m-0 ff-ss tt-u c-cb fs-600 ls-000"></h1>
+  </div>
+  <p class="ff-s fs-i fs-300 lh-300">This address would contribute <span id="result" class="c-ob">$-.--</span> per year. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id loc est laborum.</p>
+</div>
+
+<div id="result"></div>
+
+<script>
+  var getUrlVar = function(key) {
+    var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search);
+    return result && unescape(result[1]) || "";
+  }
+
+  var handleResults = function(r) {
+    if (r) {
+      $('#result').html(r.value.taxes.CPA);
+    }
+  }
+
+  var pid = getUrlVar('pid');
+  var address = getUrlVar('address');
+  var owner = getUrlVar('owner');
+
+  if (pid && pid.length === 10) {
+    $.getJSON('https://www.cityofboston.gov/assessing/search/json.asp?pid=' + pid, handleResults);
+
+    if (address && owner) {
+      $('#address').html(address);
+    } else {
+      $('#address').parents('.bb-xl').remove();
+    }
+  } else {
+    console.log('Invalid PID');
+  }
+</script>

@@ -1,23 +1,2 @@
-<div id="result"></div>
-
-<script>
-  var getUrlVar = function(key) {
-    var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search);
-    return result && unescape(result[1]) || "";
-  }
-
-  var handleResults = function(r) {
-    if (r) {
-      console.log(r.value.taxes.CPA);
-      $('#result').html(r.value.taxes.CPA);
-    }
-  }
-
-  var pid = getUrlVar('pid');
-
-  if (pid && pid.length === 10) {
-    $.getJSON('https://www.cityofboston.gov/assessing/search/json.asp?pid=' + pid, handleResults);
-  } else {
-    console.log('Invalid PID');
-  }
-</script>
+<%- partial("_cpa") %>
+<%- partial("_search", { title: "Search again..." }) %>
