@@ -1,0 +1,8 @@
+{
+   "name": "CoB-CPA",
+   "version": "1.0.0",
+   "description": "A tool to calculate the cost of the CPA",
+   "dependencies": {
+     "harp": "*"
+   }
+ }
