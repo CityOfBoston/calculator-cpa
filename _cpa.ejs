@@ -50,7 +50,7 @@
       $('#results').hide('fast');
 
       if (!obj.address || !obj.owner) {
-        getPIDMeta(obj.pid);
+        getPIDMeta(obj.pid.toString());
       } else {
         $('#query').val(obj.address);
       }
@@ -63,7 +63,7 @@
     var el = $(this);
     var obj = {
       address: el.data('address'),
-      pid: el.data('pid'),
+      pid: el.data('pid').toString(),
       owner: el.data('owner')
     }
 
@@ -72,7 +72,7 @@
 
   var getPIDData = function (obj) {
     console.log(obj)
-    var pid = obj.pid && obj.pid.length === 10 ? obj.pid : getUrlVar('pid');
+    var pid = obj.pid && obj.pid.length === 10 ? obj.pid.toString() : getUrlVar('pid').toString();
     var obj = obj || {pid: pid, owner: false, address: false};
 
     if (pid && pid.length === 10) {
