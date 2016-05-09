@@ -52,7 +52,7 @@
       if (!obj.address || !obj.owner) {
         getPIDMeta(obj.pid.toString());
       } else {
-        $('#query').val(obj.address);
+        $('#query').val(obj.address.replace('         ', ' ').replace('        ', ' ').replace('       ', ' '.replace('      ', ' ').replace('     ', ' ').replace('   ', ' ')));
       }
     }
   }
