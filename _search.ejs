@@ -1,10 +1,11 @@
 <div class="mw-xl pv-xl mh-auto">
   <form class="d-f bb-xl bc-cb" action="//www.cityofboston.gov/assessing/search/json.asp" method="GET">
     <input id="query" class="d-b ff-s fs-i fs-700 b-n o-n w-90" name="q" placeholder="<%- title %>" />
-    <button class="b-n bg-n cu-p ml-a p-n">
+    <button id="search" class="b-n bg-n cu-p ml-a p-n">
       <svg class="icon-md" xmlns="http://www.w3.org/2000/svg" id="Layer_2" viewBox="0 0 40 41"><path class="p100" d="M24.2.6C15.8.6 9 7.4 9 15.8c0 3.7 1.4 7.2 3.6 9.8L1.2 37c-.8.8-.8 2 0 2.8.4.4.9.6 1.4.6s1-.2 1.4-.6l11.5-11.5C18 30 21 31 24.2 31c8.4 0 15.2-6.8 15.2-15.2C39.4 7.4 32.6.6 24.2.6zm0 26.5c-6.2 0-11.2-5-11.2-11.2S18 4.6 24.2 4.6s11.2 5 11.2 11.2-5 11.3-11.2 11.3z"/></svg>
     </button>
   </form>
+
   <div id="results"></div>
 
   <script id="resultsTable" type="text/x-handlebars-template">
@@ -17,24 +18,33 @@
       <tbody>
         {{#addresses}}
           <tr>
-            <td class="ff-ss fs-100 bt-sm bc-g200 pv-sm tt-u"><a href="/parcel.html?pid={{parcelID}}&amp;address={{address}}&amp;owner={{owner}}">{{address}}</a></td>
+            <td class="ff-ss fs-100 bt-sm bc-g200 pv-sm tt-u"><a href="/index.html?pid={{parcelID}}#resultContainer" class="parcel-link" data-owner="{{owner}}" data-address="{{address}}" data-pid="{{parcelID}}">{{address}}</a></td>
             <td class="c-g300 bt-sm bc-g200 fs-100 fs-i pv-sm">{{parcelID}}</td>
-            <td class="c-g300 bt-sm bc-g200 fs-100 fs-i pv-sm tt-c">{{owner}}</td>
+            <td class="c-g300 bt-sm bc-g200 fs-100 ff-ss fs-i pv-sm">{{owner}}</td>
           </tr>
         {{/addresses}}
       </tbody>
     </table>
   </script>
 
+  <script id="resultsNone" type="text/x-handlebars-template">
+    <p class="ff-s fs-i fs-300 lh-300">Looks like we couldn't find that address.</p>
+  </script>
+
   <script>
     var source = $('#resultsTable').html();
     var template = Handlebars.compile(source);
 
+    var sourceNone = $('#resultsNone').html();
+    var templateNone = Handlebars.compile(sourceNone);
+
     var handleResults = function(r) {
       if (r && r.addresses.length > 0) {
-        $('#results').html(template(r));
+        $('#resultContainer').html('').hide();
+        $('#results').html(template(r)).show('fast');
       } else {
-        $('#results').html("We didn't find any matches for that address.");
+        $('#results').html("");
+        $('#resultContainer').html(templateNone()).show();
       }
     }
 
@@ -56,5 +66,9 @@
 
     $('form').on('submit', handleSearch);
     $('#query').on('keyup', handleSearch);
+    $('#search').on('click', function () {
+      $('#query').val('').focus();
+      $('#resultContainer').html('').hide();
+    });
   </script>
 </script>

@@ -1,39 +1,89 @@
-<div class="mt-xl mw-xl pv-xl mh-auto">
-  <div class="d-f d-fab bb-xl bc-cb">
-    <h1 id="address" class="m-0 ff-ss pl-sm tt-u c-cb fs-600 ls-000"></h1>
-    <span id="owner" class="c-g300 ml-a mb-xs fs-i hide-md"></span>
-  </div>
-  <p class="ff-s fs-i fs-300 lh-300">This address would contribute <span id="result" class="c-ob">$-.--</span> per year. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id loc est laborum.</p>
-</div>
+<div id="resultContainer" class="mw-xl mh-auto pv-xl" style="display: none"></div>
 
-<div id="result"></div>
+<script id="resultsTemplate" type="text/x-handlebars-template">
+  <p class="ff-s fs-i fs-300 lh-300">If the Community Preservation Act had been in effect for FY 2016, the annual surcharge for this property would have been <span class="c-ob">{{cpa}}</span>.</p>
+  <p class="ff-s fs-i fs-300 lh-300">This is not an estimate for FY 2017.</p>
+</script>
 
 <script>
+  var sourceParcel = $('#resultsTemplate').html();
+  var templateParcel = Handlebars.compile(sourceParcel);
+
   var getUrlVar = function(key) {
     var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search);
     return result && unescape(result[1]) || "";
   }
 
-  var handleResults = function(r) {
-    if (r) {
-      $('#result').html(r.value.taxes.CPA);
-    }
+  var getPIDMeta = function() {
+    var pid = getUrlVar('pid');
+    $.getJSON('https://www.cityofboston.gov/assessing/search/json.asp?q=' + pid, function (r) {
+      var pidData = isPID(r, pid);
+
+      if (pidData) {
+        $('#query').val(pidData.address);
+        $('#owner').html(pidData.owner);
+      }
+    });
   }
 
-  var pid = getUrlVar('pid');
-  var address = getUrlVar('address');
-  var owner = getUrlVar('owner');
+  var isPID = function(r, pid) {
+    var i = r && r.addresses.length;
 
-  if (pid && pid.length === 10) {
-    $.getJSON('https://www.cityofboston.gov/assessing/search/json.asp?pid=' + pid, handleResults);
-
-    if (address && owner) {
-      $('#address').html(address);
-      $('#owner').html(owner);
+    if (i) {
+      while(i--) {
+        if (r.addresses[i].parcelID === pid) {
+          return r.addresses[i];
+        }
+      }
     } else {
-      $('#address').parents('.bb-xl').remove();
+      return false;
     }
-  } else {
-    console.log('Invalid PID');
   }
+
+  var handlePIDResults = function(r, obj) {
+    var obj = obj;
+
+    obj.cpa = r.value.taxes.CPA;
+
+    if (r) {
+      $('#resultContainer').html(templateParcel(obj)).show();
+      $('#results').hide('fast');
+
+      if (!obj.address || !obj.owner) {
+        getPIDMeta(obj.pid);
+      } else {
+        $('#query').val(obj.address);
+      }
+    }
+  }
+
+  var loadPIDResult = function(e) {
+    e.preventDefault();
+
+    var el = $(this);
+    var obj = {
+      address: el.data('address'),
+      pid: el.data('pid'),
+      owner: el.data('owner')
+    }
+
+    getPIDData(obj);
+  }
+
+  var getPIDData = function (obj) {
+    console.log(obj)
+    var pid = obj.pid && obj.pid.length === 10 ? obj.pid : getUrlVar('pid');
+    var obj = obj || {pid: pid, owner: false, address: false};
+
+    if (pid && pid.length === 10) {
+      $.getJSON('https://www.cityofboston.gov/assessing/search/json.asp?pid=' + pid, function(p) {
+        handlePIDResults(p, obj);
+      });
+    } else {
+      console.log('Invalid PID');
+    }
+  }
+
+  $('#results').on('click', '.parcel-link', loadPIDResult);
+  $(document).ready(getPIDData);
 </script>
