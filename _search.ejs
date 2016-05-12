@@ -12,15 +12,15 @@
     <table cellspacing="0" class="bg-g100 bg-lg bl-sm bb-sm br-sm bc-g200 p-md w-100">
       <thead>
         <th class="w-40 ff-ss fs-200 pb-sm ta-l tt-u">Address</th>
-        <th class="w-30 ff-ss fs-200 pb-sm ta-l tt-u">Parcel ID</th>
-        <th class="w-30 ff-ss fs-200 pb-sm ta-l tt-u">Owner</th>
+        <th class="w-30 ff-ss fs-200 pb-sm ta-l tt-u h-sm">Parcel ID</th>
+        <th class="w-30 ff-ss fs-200 pb-sm ta-l tt-u h-sm">Owner</th>
       </thead>
       <tbody>
         {{#addresses}}
           <tr>
             <td class="ff-ss fs-100 bt-sm bc-g200 pv-sm tt-u"><a href="/index.html?pid={{parcelID}}#resultContainer" class="parcel-link" data-owner="{{owner}}" data-address="{{address}}" data-pid="{{parcelID}}">{{address}}</a></td>
-            <td class="c-g300 bt-sm bc-g200 fs-100 fs-i pv-sm">{{parcelID}}</td>
-            <td class="c-g300 bt-sm bc-g200 fs-100 ff-ss pv-sm">{{owner}}</td>
+            <td class="c-g300 bt-sm bc-g200 fs-100 fs-i pv-sm h-sm">{{parcelID}}</td>
+            <td class="c-g300 bt-sm bc-g200 fs-100 ff-ss pv-sm h-sm">{{owner}}</td>
           </tr>
         {{/addresses}}
       </tbody>

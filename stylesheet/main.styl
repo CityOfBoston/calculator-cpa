@@ -13,17 +13,14 @@ body {
 }
 
 #query
-  &::-webkit-input-placeholder
+  &::-webkit-input-placeholder,
+  &:-moz-placeholder,
+  &::-moz-placeholder,
+  &:-ms-input-placeholder
     font-style: italic
 
-  &:-moz-placeholder
-    font-style: italic
-
-  &::-moz-placeholder
-    font-style: italic
-
-  &:-ms-input-placeholder 
-    font-style: italic
+    @media screen and (max-width: 400px)
+      font-size: 30px
 
 /* Backgrounds */
 .bg-n {
@@ -234,6 +231,10 @@ a:hover {
 .mw-xl {
   max-width: 50em;
 }
+
+.h-sm
+  @media screen and (max-width: 400px)
+    display: none;
 
 /* Outline */
 .o-n {
