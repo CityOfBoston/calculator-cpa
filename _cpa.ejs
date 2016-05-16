@@ -43,7 +43,7 @@
   var handlePIDResults = function(r, obj) {
     var obj = obj;
 
-    obj.cpa = r.value.taxes.CPA;
+    obj.cpa = r.est_cpa;
 
     if (r) {
       $('#resultContainer').html(templateParcel(obj)).show();
@@ -71,7 +71,6 @@
   }
 
   var getPIDData = function (obj) {
-    console.log(obj)
     var pid = obj.pid && obj.pid.length === 10 ? obj.pid.toString() : getUrlVar('pid').toString();
     var obj = obj || {pid: pid, owner: false, address: false};
 
