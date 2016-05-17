@@ -13,29 +13,17 @@ body {
 }
 
 #query
+  @media screen and (max-width: 500px)
+    font-size: 22px
+
+  @media screen and (min-width: 500px)
+    font-size: 30px
+
+  @media screen and (min-width: 700px)
+    font-size: 2.77777777778rem;
+
   &::-webkit-input-placeholder
     font-style: italic
-
-    @media screen and (max-width: 400px)
-      font-size: 30px
-
-  &:-moz-placeholder
-    font-style: italic
-
-    @media screen and (max-width: 400px)
-      font-size: 30px
-
-  &::-moz-placeholder
-    font-style: italic
-
-    @media screen and (max-width: 400px)
-      font-size: 30px
-
-  &:-ms-input-placeholder
-    font-style: italic
-
-    @media screen and (max-width: 400px)
-      font-size: 30px
 
 /* Backgrounds */
 .bg-n {

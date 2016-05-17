@@ -43,9 +43,9 @@
   var handlePIDResults = function(r, obj) {
     var obj = obj;
 
-    obj.cpa = r.est_cpa;
+    obj.cpa = r ? r.est_cpa : "$0.00";
 
-    if (r) {
+    if (obj.cpa) {
       $('#resultContainer').html(templateParcel(obj)).show();
       $('#results').hide('fast');
 
