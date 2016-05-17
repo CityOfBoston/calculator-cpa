@@ -50,7 +50,7 @@
       $('#results').hide('fast');
 
       if (!obj.address || !obj.owner) {
-        getPIDMeta(obj.pid.toString());
+        getPIDMeta(obj.pid);
       } else {
         $('#query').val(obj.address.replace('         ', ' ').replace('        ', ' ').replace('       ', ' '.replace('      ', ' ').replace('     ', ' ').replace('   ', ' ')));
       }
@@ -61,11 +61,16 @@
     e.preventDefault();
 
     var el = $(this);
+
+    history.pushState({}, '', el.attr("href"));
+
     var obj = {
       address: el.data('address'),
       pid: el.data('pid').toString(),
       owner: el.data('owner')
     }
+
+    window.smoothScroll(document.getElementById('scroll'), 100);
 
     getPIDData(obj);
   }

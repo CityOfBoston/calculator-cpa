@@ -1,4 +1,4 @@
-<div class="mw-xl pv-xl mh-auto">
+<div id="scroll" class="mw-xl pv-xl mh-auto">
   <form class="d-f bb-xl bc-cb" action="//www.cityofboston.gov/assessing/search/json.asp" method="GET">
     <input id="query" class="d-b ff-s fs-700 b-n o-n w-90" name="q" placeholder="Search address or parcel ID" />
     <button id="search" class="b-n bg-n cu-p ml-a p-n">
@@ -65,7 +65,12 @@
     }
 
     $('form').on('submit', handleSearch);
-    $('#query').on('keyup', handleSearch);
+    $('#query').on('keyup', handleSearch)
+               .on('blur', function () {
+                 if ($(this).val() === '') {
+                   $('#results').html("");
+                 }
+               });
     $('#search').on('click', function () {
       $('#query').val('').focus();
       $('#resultContainer').html('').hide();
