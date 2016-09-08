@@ -10,7 +10,9 @@
     <link href='/stylesheet/main.css' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <script type="text/javascript">
-      if (!window.location.search.indexOf('bypass') > -1) {
+      var bypass = window.location.search.indexOf('bypass') > -1;
+
+      if (!bypass) {
         window.location.href = "http://www.cityofboston.gov/news/default.aspx?id=20600"
       }
     </script>
