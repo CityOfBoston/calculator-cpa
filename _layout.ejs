@@ -9,10 +9,16 @@
     <link href='https://fonts.googleapis.com/css?family=Lora:400italic|Montserrat:700' rel='stylesheet' type='text/css'>
     <link href='/stylesheet/main.css' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta http-equiv="refresh" content="0;url=http://www.cityofboston.gov/news/default.aspx?id=20600">
     <script type="text/javascript">
-      window.location.href = "http://www.cityofboston.gov/news/default.aspx?id=20600"
+      if (window.location.search.indexOf('bypass') > -1) {
+        // We're good here.
+      } else {
+        window.location.href = "http://www.cityofboston.gov/news/default.aspx?id=20600"
+      }
     </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0;url=http://www.cityofboston.gov/news/default.aspx?id=20600">
+    </noscript>
   </head>
   <body>
     <%- yield %>
