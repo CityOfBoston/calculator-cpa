@@ -1,7 +1,7 @@
 {
    "name": "CoB-CPA",
    "version": "1.0.0",
-   "description": "A tool to calculate the cost of the CPA",
+   "description": "A tool to calculate the cost of the Community Preservation Act",
    "dependencies": {
      "harp": "*"
    }
