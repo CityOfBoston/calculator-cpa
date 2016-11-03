@@ -4,6 +4,12 @@ This project is in the public domain within the United States.
 
 Additionally, we waive copyright and related rights in the work worldwide through the CC0 1.0 Universal public domain dedication.
 
+## Exclusions from public domain
+
+- This project uses various third-party JavaScript tools, which for convenience are versioned in this repository. Any files in the following directories are subject to their own licenses:
+
+  * `javascript`
+
 ## CC0 1.0 Universal Summary
 
 This is a human-readable summary of the [Legal Code (read the full text)](https://creativecommons.org/publicdomain/zero/1.0/legalcode).
